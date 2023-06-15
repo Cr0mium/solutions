@@ -40,3 +40,32 @@ public:
         return cur;
     }
 };
+// reverse in k groups
+class Solution
+{
+    public:
+    struct node* rev(struct node *head, int k)
+    {
+        if(!head) return head;
+        struct node *n,*cur=head,*p;
+        n=head;
+        for(int i=0;i<k && n!=NULL;++i)
+        {
+            p=cur;
+            cur=n;
+            n=cur->next;
+            cur->next=p;
+        }
+        p=reverse(n,k);
+        head->next=p;
+        return cur;
+    }
+    struct node *reverse (struct node *head, int k)
+    { 
+        // Complete this method
+        if(!head) return head;
+        struct node* cur= rev(head,k);
+        return cur;
+        
+    }
+};
