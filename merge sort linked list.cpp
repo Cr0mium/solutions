@@ -1,53 +1,42 @@
-Node* merge(Node *a, Node *b)
+class Solution{
+  public:
+    //Function to sort the given linked list using Merge Sort.
+    void split(Node *head,Node **a, Node **b)
     {
-        Node *head=new Node(0);
-        Node *res=head;
-        while(a&&b)
+        Node *fast=head,*slow=head;
+        while(fast->next)
         {
-            if(a->data<b->data)
+            fast=fast->next;
+            if(fast->next)
             {
-                head->next=a;
-                a=a->next;
+                fast=fast->next;
+                slow=slow->next;
             }
-            else
-            {
-                head->next=b;
-                b=b->next;
-            }
-            head=(head->next);
         }
-        if(a) head->next=a;
-        if(b) head->next=b;
-        res=res->next;
-        return res;
+        *a=head;
+        *b=slow->next;
+        slow->next=NULL;
     }
-    Node *sort(Node *head,int l,int r)
+    Node* mergeList(Node *a,Node *b)
     {
-        if(l==r-1) return head;
-        
-        Node *a=head,*p,*b=head;
-        for(int i=l;i<(l+r+1)/2;++i)
-        {   
-            
-            p=a,a=a->next;
-            
-        }
-        p->next=NULL;
-        b=sort(b,l,(l+r+1)/2);
-        a=sort(a,(l+r+1)/2,r);
-        Node *res=merge(b,a);
+        if(!a) return b;
+        if(!b) return a;
+        Node *res;
+        if(a->data<=b->data)
+            res=a,res->next=mergeList(a->next,b);
+        else
+            res=b,res->next=mergeList(a,b->next);
         return res;
+        
     }
     Node* mergeSort(Node* head) {
         // your code here
-        Node *x=head;
-        int n=0;
-        while(x)
-        {
-            x=x->next;
-            ++n;
-        }
-        x = sort(head,0,n);
-        return x;
+        if(!head || !(head->next)) return head;
+        Node *a,*b;
+        split(head,&a,&b);
+        a=mergeSort(a);//142 
+        b=mergeSort(b);
+        head=mergeList(a,b);
+        return head;
     }
 };
