@@ -46,7 +46,7 @@ void partition(node **start,node **end)
     }
     node *x=*start;
     partition( start,&p);
-    if(*end!=last)// if pivot is last and not element were added after that
+    if(*end!=last)// if pivot is last and no elements were added after the pivot
         partition(&(*end)->next,&last);
 }
 
