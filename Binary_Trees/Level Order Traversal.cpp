@@ -23,4 +23,34 @@ class Solution
         }
         return ans;
     }
+    vector<int> reverseLevelOrder(Node *node)
+    {
+        // code here
+        vector<int> ans;
+        stack<int> s;
+            queue<Node*> nodes;
+            if(node) nodes.push(node);
+            while(nodes.size())
+            {
+                
+                s.push(nodes.front()->data);
+                
+                if(nodes.front()->right)
+                nodes.push(nodes.front()->right);
+                
+                if(nodes.front()->left)
+                nodes.push(nodes.front()->left);
+                
+                nodes.pop();
+                
+            }
+            while(s.size())
+            {
+                ans.push_back(s.top());
+                s.pop();
+            }
+            return ans;
+    }
 };
+
+
