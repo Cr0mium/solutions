@@ -1,0 +1,47 @@
+class Solution{
+    public:
+    
+    void prN(Node *node)
+    {
+        cout<<(node!=NULL?to_string(node->data):"NULL")<<endl;
+    }
+    
+    Node *solve(int in[],int pre[],int l,int r,int &cur)
+    {
+        if(l==r) return NULL;
+        int root=pre[cur];
+        ++cur;
+        int index=0;        
+        
+        for(int i=l;i<r;++i)
+        {
+            index=i;       //3
+            if(in[i]==root)
+                break;
+        }
+        Node *x=new Node(root);
+        //prN(x);
+        x->left=solve(in,pre,l,index,cur);
+        x->right=solve(in,pre,index+1,r,cur);// 2,3
+        return x;
+    }
+    
+    Node* buildTree(int in[],int pre[], int n)
+    {
+        // Code here
+        Node *root,*cur;
+        stack<int> s;
+        for(int i=0;i<n;++i)
+        {
+            cur= new Node(pre[i]);
+            while()
+            s.push(in[i]);
+            if(stack.size())
+            {
+                if(stack.top() == )
+            }
+        }
+        
+        return *root
+    }
+};
